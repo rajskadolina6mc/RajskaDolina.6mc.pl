@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Rajska Dolina | Minecraft 1.21.10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    /* --- GLOBALNE --- */
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #0f172a;
+        color: #e5e7eb;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* --- HEADER --- */
+    header {
+        background: linear-gradient(135deg, #0f172a, #020617);
+        padding: 40px 20px;
+        text-align: center;
+        border-bottom: 3px solid #22c55e;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    header h1 {
+        margin: 0;
+        font-size: 50px;
+        color: #22c55e;
+        text-shadow: 1px 1px 5px #000;
+    }
+    header p {
+        margin: 5px 0 0;
+        color: #94a3b8;
+        font-size: 18px;
+    }
+
+    /* --- MENU --- */
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        background: #020617;
+        border-bottom: 2px solid #1e293b;
+    }
+    nav button {
+        background: none;
+        border: 2px solid #22c55e;
+        margin: 5px;
+        border-radius: 8px;
+        color: #e5e7eb;
+        padding: 12px 28px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    nav button:hover, nav button.active {
+        background: #22c55e;
+        color: #020617;
+        transform: scale(1.05);
+    }
+
+    /* --- KONTAINER --- */
+    .container {
+        max-width: 1100px;
+        margin: auto;
+        padding: 30px 20px;
+    }
+
+    /* --- TABY --- */
+    .tab { display: none; animation: fade 0.4s; }
+    .tab.active { display: block; }
+    @keyframes fade { from {opacity:0;} to {opacity:1;} }
+
+    /* --- BOXY --- */
+    .box {
+        background: #1e293b;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        border: 1px solid #22c55e;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        transition: transform 0.3s ease;
+    }
+    .box:hover { transform: translateY(-5px); }
+
+    h2 { color: #22c55e; margin-top: 0; font-size: 28px; }
+    h3 { color: #94a3b8; margin-top: 15px; }
+
+    p, li { line-height: 1.6; font-size: 16px; }
+    li { margin-bottom: 8px; }
+
+    /* --- STATUS SERWERA --- */
+    .status {
+        font-size: 20px;
+        font-weight: bold;
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 1px solid #22c55e;
+        background: rgba(34,197,94,0.1);
+    }
+    .online { color: #22c55e; border-color:#22c55e; }
+    .offline { color: #ef4444; border-color:#ef4444; background: rgba(239,68,68,0.1); }
+
+    /* --- PRZYCISKI --- */
+    button.custom-btn {
+        background: #22c55e;
+        color: #020617;
+        border: none;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    button.custom-btn:hover { background: #16a34a; }
+
+    /* --- FOOTER --- */
+    footer {
+        text-align: center;
+        padding: 25px 10px;
+        background: #020617;
+        color: #64748b;
+        font-size: 14px;
+        border-top: 2px solid #22c55e;
+    }
+
+    /* --- RESPONSYWNE --- */
+    @media (max-width: 600px){
+        nav button { padding: 10px 18px; font-size: 14px; }
+        h2 { font-size: 24px; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🌴 Rajska Dolina 🌴</h1>
+    <p>Minecraft • Wersja 1.21.10</p>
+</header>
+
+<nav>
+    <button class="active" onclick="openTab('home', this)">Strona główna</button>
+    <button onclick="openTab('rules', this)">Regulamin</button>
+    <button onclick="window.open('https://discord.gg/SG85GEzZRe','_blank')">Discord</button>
+    <button onclick="openTab('join', this)">Jak Dołączyć</button>
+    <button onclick="window.open('https://tipply.pl/@zulianno','_blank')">Wsparcie ❤️</button>
+</nav>
+
+<div class="container">
+
+    <!-- STRONA GŁÓWNA -->
+    <div id="home" class="tab active">
+        <div class="box">
+            <h2>🌟 O serwerze</h2>
+            <p>Rajska Dolina to serwer Survival RP w wersji 1.21.10, dostępny dla graczy Premium i Non-Premium, działający na zasadzie whitelisty. Rozgrywka opiera się na luźnym RP, skupionym na budowaniu, spokojnej grze i dobrej atmosferze.</p>
+        </div>
+
+        <div class="box">
+            <h2>📡 Status serwera</h2>
+            <p>Status: <span id="serverStatus">Sprawdzanie...</span></p>
+            <p>IP: <strong>rajskadolina.6mc.pl</strong></p>
+            <p>Wersja: <strong>1.21.10</strong></p>
+        </div>
+    </div>
+
+    <!-- REGULAMIN -->
+    <div id="rules" class="tab">
+        <div class="box">
+            <h2>📜 Regulamin serwera Rajska Dolina</h2>
+            <h3>I. Postanowienia ogólne</h3>
+            <ul>
+                <li>Korzystanie z serwera oznacza akceptację regulaminu.</li>
+                <li>Nieznajomość regulaminu nie zwalnia z obowiązku jego przestrzegania.</li>
+            </ul>
+            <!-- Reszta regulaminu w tym samym stylu -->
+        </div>
+    </div>
+
+    <!-- JAK DOŁĄCZYĆ -->
+    <div id="join" class="tab">
+        <div class="box">
+            <h2>🚀 Jak dołączyć?</h2>
+            <p>Aby dołączyć do serwera <strong>Rajska Dolina</strong>, wymagany Minecraft w wersji 1.21.10 (Premium lub Non-Premium) i przejście whitelisty. Obowiązkowy mod <strong>Simple Voice Chat</strong>.</p>
+            <ol>
+                <li>Uruchom Minecraft JAVA</li>
+                <li>Wybierz wersję <strong>1.21.10</strong></li>
+                <li>Dodaj serwer: IP: <strong>rajskadolina.pl</strong></li>
+                <li>Dołącz i ciesz się grą!</li>
+            </ol>
+            <button class="custom-btn" onclick="window.open('https://discord.gg/SG85GEzZRe','_blank')">Dołącz do Discorda</button>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    © 2025 Rajska Dolina • Minecraft 1.21.10
+</footer>
+
+<script>
+function openTab(tabId, btn){
+    document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+    if(btn) btn.classList.add('active');
+}
+
+// Status serwera (symulacja)
+const online = true;
+const statusEl = document.getElementById("serverStatus");
+if(online){
+    statusEl.textContent="ONLINE";
+    statusEl.className="online";
+} else {
+    statusEl.textContent="OFFLINE";
+    statusEl.className="offline";
+}
+</script>
+
+</body>
+</html>
