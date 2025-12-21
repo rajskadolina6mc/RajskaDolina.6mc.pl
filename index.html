@@ -4,302 +4,321 @@
 <meta charset="UTF-8">
 <title>Rajska Dolina | Minecraft 1.21.10</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-    /* --- GLOBALNE --- */
-    * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #0f172a;
-        color: #e5e7eb;
-    }
-    a { text-decoration: none; color: inherit; }
+/* ================== VARIABLES ================== */
+:root {
+    --bg-main: #020617;
+    --bg-soft: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.75);
+    --accent: #22c55e;
+    --accent-glow: rgba(34, 197, 94, 0.45);
+    --text-main: #e5e7eb;
+    --text-muted: #94a3b8;
+    --border-soft: rgba(148, 163, 184, 0.15);
+}
 
-    /* --- HEADER --- */
-    header {
-        background: linear-gradient(135deg, #0f172a, #020617);
-        padding: 40px 20px;
-        text-align: center;
-        border-bottom: 3px solid #22c55e;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    header h1 {
-        margin: 0;
-        font-size: 50px;
-        color: #22c55e;
-        text-shadow: 1px 1px 5px #000;
-    }
-    header p {
-        margin: 5px 0 0;
-        color: #94a3b8;
-        font-size: 18px;
-    }
+/* ================== RESET ================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    /* --- MENU --- */
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        background: #020617;
-        border-bottom: 2px solid #1e293b;
-    }
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: radial-gradient(circle at top, #020617, #000);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* ================== HEADER ================== */
+header {
+    padding: 60px 20px;
+    text-align: center;
+    background:
+        radial-gradient(circle at top, var(--accent-glow), transparent 60%),
+        linear-gradient(135deg, var(--bg-soft), var(--bg-main));
+    border-bottom: 2px solid var(--border-soft);
+}
+
+header h1 {
+    font-size: clamp(42px, 6vw, 64px);
+    color: var(--accent);
+    text-shadow: 0 0 25px var(--accent-glow);
+}
+
+header p {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 18px;
+}
+
+/* ================== NAV ================== */
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px;
+    background: rgba(2, 6, 23, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+nav button {
+    margin: 6px;
+    padding: 12px 26px;
+    font-size: 15px;
+    border-radius: 12px;
+    border: 1px solid var(--border-soft);
+    background: transparent;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+nav button:hover,
+nav button.active {
+    background: var(--accent);
+    color: #02130a;
+    box-shadow: 0 0 18px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+/* ================== LAYOUT ================== */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.tab {
+    display: none;
+    animation: fade 0.35s ease;
+}
+
+.tab.active {
+    display: block;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================== CARD ================== */
+.box {
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid var(--border-soft);
+    margin-bottom: 30px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+    transition: 0.3s ease;
+}
+
+.box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+
+/* ================== TEXT ================== */
+h2 {
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+
+h3 {
+    color: var(--text-muted);
+    margin-top: 25px;
+}
+
+p {
+    margin-bottom: 14px;
+}
+
+ul, ol {
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+/* ================== STATUS ================== */
+.status {
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.online {
+    color: var(--accent);
+    background: rgba(34,197,94,0.15);
+    border: 1px solid var(--accent);
+}
+
+.offline {
+    color: #ef4444;
+    background: rgba(239,68,68,0.15);
+    border: 1px solid #ef4444;
+}
+
+/* ================== FOOTER ================== */
+footer {
+    text-align: center;
+    padding: 25px;
+    color: var(--text-muted);
+    background: rgba(2,6,23,0.9);
+    border-top: 1px solid var(--border-soft);
+}
+
+/* ================== MOBILE ================== */
+@media (max-width: 600px) {
     nav button {
-        background: none;
-        border: 2px solid #22c55e;
-        margin: 5px;
-        border-radius: 8px;
-        color: #e5e7eb;
-        padding: 12px 28px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-    nav button:hover, nav button.active {
-        background: #22c55e;
-        color: #020617;
-        transform: scale(1.05);
-    }
-
-    /* --- KONTAINER --- */
-    .container {
-        max-width: 1100px;
-        margin: auto;
-        padding: 30px 20px;
-    }
-
-    /* --- TABY --- */
-    .tab { display: none; animation: fade 0.4s; }
-    .tab.active { display: block; }
-    @keyframes fade { from {opacity:0;} to {opacity:1;} }
-
-    /* --- BOXY --- */
-    .box {
-        background: #1e293b;
-        padding: 30px;
-        border-radius: 15px;
-        margin-bottom: 25px;
-        border: 1px solid #22c55e;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        transition: transform 0.3s ease;
-    }
-    .box:hover { transform: translateY(-5px); }
-
-    h2 { color: #22c55e; margin-top: 0; font-size: 28px; }
-    h3 { color: #94a3b8; margin-top: 15px; }
-
-    p, li { line-height: 1.6; font-size: 16px; }
-    li { margin-bottom: 8px; }
-
-    /* --- STATUS SERWERA --- */
-    .status {
-        font-size: 20px;
-        font-weight: bold;
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 8px;
-        border: 1px solid #22c55e;
-        background: rgba(34,197,94,0.1);
-    }
-    .online { color: #22c55e; border-color:#22c55e; }
-    .offline { color: #ef4444; border-color:#ef4444; background: rgba(239,68,68,0.1); }
-
-    /* --- PRZYCISKI --- */
-    button.custom-btn {
-        background: #22c55e;
-        color: #020617;
-        border: none;
-        padding: 12px 20px;
-        font-size: 16px;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-    button.custom-btn:hover { background: #16a34a; }
-
-    /* --- FOOTER --- */
-    footer {
-        text-align: center;
-        padding: 25px 10px;
-        background: #020617;
-        color: #64748b;
+        padding: 10px 18px;
         font-size: 14px;
-        border-top: 2px solid #22c55e;
     }
-
-    /* --- RESPONSYWNE --- */
-    @media (max-width: 600px){
-        nav button { padding: 10px 18px; font-size: 14px; }
-        h2 { font-size: 24px; }
-    }
+}
 </style>
 </head>
+
 <body>
 
 <header>
     <h1>🌴 Rajska Dolina 🌴</h1>
-    <p>Minecraft • Wersja 1.21.10</p>
+    <p>Minecraft • Survival RP • 1.21.10</p>
 </header>
 
 <nav>
     <button class="active" onclick="openTab('home', this)">Strona główna</button>
     <button onclick="openTab('rules', this)">Regulamin</button>
+    <button onclick="openTab('join', this)">Jak dołączyć</button>
     <button onclick="window.open('https://discord.gg/SG85GEzZRe','_blank')">Discord</button>
-    <button onclick="openTab('join', this)">Jak Dołączyć</button>
     <button onclick="window.open('https://tipply.pl/@zulianno','_blank')">Wsparcie ❤️</button>
 </nav>
 
 <div class="container">
 
-<!-- STRONA GŁÓWNA -->
 <div id="home" class="tab active">
     <div class="box">
-        <h2>🌟 O serwerze</h2>
-        <p>Rajska Dolina to serwer <strong>Survival RP</strong> w wersji <strong>1.21.10</strong> dostępny dla graczy Premium i Non-Premium, działający na zasadzie whitelisty.</p>
-        <p>Skupiamy się na spokojnej rozgrywce, budowaniu, luźnym RP i dobrej atmosferze bez toksycznych zachowań.</p>
+
+        <h2>🌟 O serwerze Rajska Dolina</h2>
+        <p><strong>Rajska Dolina</strong> to kameralny, przyjazny serwer <strong>Survival RP</strong>, stworzony zarówno dla graczy <strong>Premium</strong>, jak i <strong>Non-Premium</strong>.</p>
+        <p>Stawiamy na spokojną, długoterminową rozgrywkę – rozwijanie własnych baz, realizowanie kreatywnych projektów oraz tworzenie historii w duchu RP.</p>
+        <p>U nas nie ma miejsca na toksyczność, bezsensowne PvP ani niszczenie czyjejś pracy. To świat tworzony przez graczy – dla graczy.</p>
+
+        <h3>🎮 Tryby gry</h3>
+        <ul>
+            <li><strong>Survival RP:</strong> rozwijaj swoją postać i bazę w realistycznym świecie RPG.</li>
+            <li><strong>Economy:</strong> handel z innymi graczami, tworzenie własnych biznesów i ekonomii lokalnej.</li>
+            <li><strong>Eventy i konkursy:</strong> regularne wyzwania, mini-eventy i nagrody dla aktywnych graczy.</li>
+            <li><strong>Kreatywne projekty:</strong> wspólne budowle, miasta, instytucje i lore serwera.</li>
+        </ul>
+
+        <h3>🆕 Dla nowych graczy</h3>
+        <ul>
+            <li>Łatwe dołączenie – wystarczy Discord i formularz whitelisty.</li>
+            <li>Przyjazna społeczność, pomoc w pierwszych krokach.</li>
+            <li>Instrukcje instalacji modów oraz konfiguracja Simple Voice Chat.</li>
+            <li>Bezpieczne miejsce do nauki zasad RP i survivalu.</li>
+        </ul>
+
+        <h3>👥 Społeczność i bezpieczeństwo</h3>
+        <ul>
+            <li>Moderowana społeczność – brak toksyczności i griefu.</li>
+            <li>Aktywna administracja dostępna dla graczy.</li>
+            <li>Możliwość tworzenia gildii, klubów i wspólnych projektów.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>📡 Status serwera</h2>
+        <p>Status: <span id="serverStatus" class="status">Sprawdzanie...</span></p>
+        <p>Adres serwera: <strong>rajskadolina.6mc.pl</strong></p>
+        <p>Wersja Minecraft: <strong>1.21.10</strong></p>
     </div>
 </div>
 
-          <h2>📡 Status serwera</h2>
 
-<p>
-    Status: 
-    <span id="serverStatus">Sprawdzanie...</span>
-</p>
-
-<p>
-    IP serwera: 
-    <strong>rajskadolina.6mc.pl</strong>
-</p>
-
-<p>
-    Wersja gry: 
-    <strong>1.21.10</strong>
-</p>
-
-<p>
-    Tryb gry: 
-    <strong>Survival RP (luźne RP)</strong>
-</p>
-
-<p>
-    Dostęp: 
-    <strong>Whitelist (Premium & Non-Premium)</strong>
-</p>
-
-<p>
-    PvP: 
-    <strong>Ograniczone – tylko z uzasadnionych powodów</strong>
-</p>
-
-<p>
-    Komunikacja głosowa: 
-    <strong>Wymagany mod Simple Voice Chat</strong>
-</p>
-
-<p>
-    Styl rozgrywki:
-    <strong>Budowanie • Społeczność • Spokojna gra</strong>
-</p>
-        </div>
-    </div>
-
-    <!-- REGULAMIN -->
 <div id="rules" class="tab">
     <div class="box">
+
         <h2>📜 Regulamin serwera Rajska Dolina</h2>
 
         <h3>I. Postanowienia ogólne</h3>
         <ul>
-            <li>Korzystanie z serwera oznacza akceptację niniejszego regulaminu.</li>
-            <li>Nieznajomość regulaminu nie zwalnia z obowiązku jego przestrzegania.</li>
-            <li>Regulamin może zostać zmieniony w dowolnym momencie; o zmianach administracja poinformuje na serwerze.</li>
-            <li>Każda kara ustalana jest indywidualnie, z uwzględnieniem okoliczności naruszenia.</li>
+            <li>Korzystanie z serwera <strong>Rajska Dolina</strong> oznacza pełną akceptację niniejszego regulaminu.</li>
+            <li>Nieznajomość regulaminu nie zwalnia gracza z obowiązku jego przestrzegania.</li>
+            <li>Administracja zastrzega sobie prawo do zmiany regulaminu w dowolnym momencie.</li>
+            <li>Każda kara nakładana jest indywidualnie, z uwzględnieniem skali przewinienia i wcześniejszego zachowania gracza.</li>
         </ul>
 
         <h3>II. Definicje</h3>
         <ul>
-            <li><strong>Oszukiwanie (cheatowanie)</strong> – korzystanie z programów, skryptów, modyfikacji lub metod dających przewagę niedostępną w normalnej rozgrywce bez zgody administracji.</li>
-            <li><strong>Grief</strong> – celowe niszczenie, kradzież lub trwałe uszkadzanie budowli i przedmiotów innych graczy.</li>
-            <li><strong>Prank</strong> – żart niepowodujący trwałych szkód, zgodny z zasadami serwera i niebędący poważnym griefem.</li>
+            <li><strong>Cheaty</strong> – wszelkie modyfikacje, programy lub metody dające graczowi nieuczciwą przewagę nad innymi.</li>
+            <li><strong>Grief</strong> – celowe niszczenie, kradzież lub trwałe uszkadzanie budowli oraz mienia innych graczy.</li>
+            <li><strong>Prank</strong> – żart, który nie powoduje trwałych strat i jest zgodny z zasadami serwera.</li>
         </ul>
 
         <h3>III. Zakazy i ograniczenia</h3>
         <ul>
-            <li>Zakazane jest wszelkiego rodzaju oszukiwanie (cheatowanie). <strong>Litematica jest dozwolona.</strong></li>
-            <li>Samo posiadanie niedozwolonych, aktywnych programów może zostać uznane za próbę ich użycia.</li>
-            <li>Zakazany jest ciężki grief (masowe niszczenie, trwałe wyburzanie baz, kradzież dużych ilości cennych przedmiotów).</li>
-            <li>Dopuszczalne są drobne pranki, o ile nie powodują istotnych szkód.</li>
-            <li>Zakazane jest bezcelowe spamowanie na czacie.</li>
-            <li>Zakazana jest współpraca z cheaterami – traktowana jako współuczestnictwo.</li>
-            <li>Zakazane jest tworzenie trapów służących do bezprawnego uwięzienia lub zabijania graczy (dozwolona jest obrona bazy).</li>
-            <li>Zakazane jest celowe powodowanie lagów lub destabilizowanie serwera.</li>
-            <li>Zakazane jest wykorzystywanie multikont do uzyskiwania nienależnych korzyści.</li>
-            <li>Zakazane są minimapy ujawniające położenie podziemnych struktur, mobów lub graczy. Dozwolone są tylko mapy powierzchniowe.</li>
+            <li>Surowo zabronione jest korzystanie z cheatów oraz innych niedozwolonych modyfikacji. <strong>Litematica jest dozwolona.</strong></li>
+            <li>Zakazany jest ciężki grief, w tym masowe niszczenie baz oraz kradzież cennych przedmiotów.</li>
+            <li>Współpraca z cheaterami jest traktowana jako współudział i podlega karze.</li>
+            <li>Bezpodstawne PvP, zabijanie graczy bez uzasadnionej przyczyny oraz nękanie innych użytkowników są zabronione.</li>
         </ul>
 
-        <h3>IV. Zasady współżycia na serwerze</h3>
+        <h3>IV. Zasady PvP</h3>
         <p>
-            Celem serwera jest dobra zabawa – bez griefu, toksycznych zachowań oraz nieuzasadnionego PvP.
+            Serwer nie jest nastawiony na PvP. Zabicie gracza jest dozwolone wyłącznie w uzasadnionych sytuacjach, takich jak:
         </p>
-
-        <p>
-            Serwer nie jest nastawiony na PvP. Zabicie gracza jest dopuszczalne tylko z uzasadnionego powodu
-            i zgodnie z duchem serwera. Tworzenie tzw. „bojówek”, zabijanie bez powodu, straszenie graczy
-            lub prowokowanie walk jest uznawane za grief.
-        </p>
-
-        <p><strong>Uzasadnione powody do zabicia gracza:</strong></p>
         <ul>
             <li>kradzież wartościowych przedmiotów;</li>
-            <li>niszczenie czyjejś bazy;</li>
-            <li>zorganizowane walki za zgodą obu stron;</li>
-            <li>ragebaitowanie w stopniu uzasadniającym reakcję.</li>
+            <li>niszczenie lub próba zniszczenia czyjejś bazy;</li>
+            <li>zorganizowane walki za wyraźną zgodą obu stron;</li>
+            <li>prowokowanie (ragebaitowanie) w stopniu wymagającym reakcji.</li>
         </ul>
 
-        <p>
-            W sytuacjach spornych sprawę można zgłosić do sądu serwerowego lub administracji.
-            Decyzja musi być proporcjonalna i zgodna z duchem serwera.
-        </p>
-
-        <p>
-            Do gry na serwerze <strong>wymagany jest mod Simple Voice Chat</strong>.
-            Instrukcja instalacji znajduje się w poradnikach serwera.
-        </p>
-
-        <p>
-            Toksyczne działania (np. ujawnianie lokalizacji tajnych baz, celowe uprzykrzanie gry innym)
-            mogą skutkować karą.
-        </p>
-
-        <h3>V. Postępowanie dyscyplinarne</h3>
+        <h3>V. Kary</h3>
         <ul>
-            <li>Sankcje (ostrzeżenia, bany czasowe, permbany, odbudowy) ustalane są indywidualnie.</li>
-            <li>Administracja ma prawo do interpretacji regulaminu dla dobra społeczności.</li>
-            <li>Zniszczone bazy mogą zostać cofnięte do pierwotnego stanu.</li>
-            <li>Bazy znalezione przez cheaterów mogą zostać przeniesione w inne miejsce.</li>
-            <li>Zgłoszenia muszą zawierać dowód – screenshot lub najlepiej klip wideo.</li>
+            <li>ostrzeżenia (warny);</li>
+            <li>bany czasowe;</li>
+            <li>permanentne bany.</li>
         </ul>
+        <p>
+            Wysokość i rodzaj kary zależą od wagi naruszenia regulaminu oraz historii kar gracza.
+        </p>
 
         <h3>VI. Postanowienia końcowe</h3>
         <ul>
             <li>Wykorzystywanie luk w regulaminie jest zabronione.</li>
-            <li>Ostateczna decyzja w sprawach spornych należy do administracji serwera.</li>
+            <li>Ostateczna decyzja w każdej sprawie należy do administracji serwera <strong>Rajska Dolina</strong>.</li>
         </ul>
+
     </div>
 </div>
 
-   <h2>🚀 Jak dołączyć?</h2>
- <p>Aby dołączyć do serwera <strong>Rajska Dolina</strong>, wymagany Minecraft w wersji 1.21.10 (Premium lub Non-Premium) i przejście whitelisty. Obowiązkowy mod <strong>Simple Voice Chat</strong>.</p>
- <ol> 
-<li>Dołącz na nasz serwer Discord</li>
-<li>Wypełnij formularz rekrutacyjny</li>
-<li>Poczekaj na wynik podania</li> 
-<li>Uruchom Minecraft</li> 
-<li>Zainstaluj Simple Voice Chat</li> 
-<li>Wybierz wersję <strong>1.21.10</strong></li> 
-<li>Dodaj serwer: IP: <strong>RajskaDolina.6mc.pl</strong></li> 
-<li>Dołącz i ciesz się grą!</li> 
-</ol>
+
+
+<div id="join" class="tab">
+    <div class="box">
+        <h2>🚀 Jak dołączyć do Rajskiej Doliny?</h2>
+        <ol>
+            <li>Dołącz na nasz <strong>serwer Discord</strong>, gdzie znajdziesz wszystkie informacje.</li>
+            <li>Wypełnij <strong>formularz whitelisty</strong> dostępny na Discordzie.</li>
+            <li>Poczekaj na decyzję administracji.</li>
+            <li>Zainstaluj wymagany mod <strong>Simple Voice Chat</strong>.</li>
+            <li>Uruchom Minecraft w wersji <strong>1.21.10</strong>.</li>
+            <li>Dodaj serwer o adresie: <strong>rajskadolina.6mc.pl</strong>.</li>
+            <li>Wejdź na serwer, rozgość się i baw się dobrze 🌴</li>
+        </ol>
+    </div>
+</div>
+
 
 </div>
 
@@ -308,22 +327,23 @@
 </footer>
 
 <script>
-function openTab(tabId, btn){
-    document.querySelectorAll('.tab').forEach(tab=>tab.classList.remove('active'));
-    document.getElementById(tabId).classList.add('active');
-    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-    if(btn) btn.classList.add('active');
+function openTab(id, btn) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 }
 
-// Status serwera (symulacja)
-const online = true;
-const statusEl = document.getElementById("serverStatus");
-if(online){
-    statusEl.textContent="ONLINE";
-    statusEl.className="online";
+const serverOnline = true;
+const status = document.getElementById("serverStatus");
+
+if (serverOnline) {
+    status.textContent = "ONLINE";
+    status.classList.add("online");
 } else {
-    statusEl.textContent="OFFLINE";
-    statusEl.className="offline";
+    status.textContent = "OFFLINE";
+    status.classList.add("offline");
 }
 </script>
 
