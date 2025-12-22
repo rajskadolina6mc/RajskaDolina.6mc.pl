@@ -51,7 +51,14 @@ header {
 header h1 {
     font-size: clamp(42px, 6vw, 64px);
     color: var(--accent);
-    text-shadow: 0 0 25px var(--accent-glow);
+
+    /* CZARNA OBRAMÓWKA */
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+         0  0  25px var(--accent-glow);
 }
 
 header p {
@@ -388,5 +395,6 @@ function openTab(id, btn) {
 
 </body>
 </html>
+
 
 
