@@ -40,8 +40,7 @@ body {
 }
 
 header {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
-        url("banner.png") center / cover no-repeat;
+    background: linear-gradient(to bottom, #040A17, #020617);
     padding: 130px 20px;
 }
 
@@ -223,7 +222,9 @@ footer {
     <button class="active" onclick="openTab('home', this)">Strona główna✅</button>
     <button onclick="openTab('rules', this)">Regulamin💚</button>
     <button onclick="openTab('admin', this)">Administracja😎</button>
+    <button onclick="openTab('mapa', this)">Mapa🗺️</button>
     <button onclick="openTab('join', this)">Jak dołączyć🚀</button>
+    <button onclick="openTab('shop', this)">Sklep🛒</button>
     <button onclick="window.open('https://discord.gg/SG85GEzZRe','_blank')">Discord💜</button>
     <button onclick="window.open('https://tipply.pl/@zulianno','_blank')">Wsparcie💰</button>
 </nav>
@@ -272,6 +273,7 @@ footer {
 
     <p>Adres serwera: <strong>rajskadolina.6mc.pl</strong></p>
     <p>Wersja Minecraft: <strong>1.21.10</strong></p>
+	<p>Gracze online: <strong id="players">Ładowanie...</strong></p>
   </div>
 </div>
 
@@ -352,15 +354,22 @@ footer {
 
         <h3>🛠️ Moderatorzy</h3>
         <div class="admin-row">
-            <img src="https://mc-heads.net/avatar/ZelkiHarriboPLX/64">
-            <strong>ZelkiHarriboPLX</strong>
-        </div>
-
-        <div class="admin-row">
             <img src="https://mc-heads.net/avatar/VINCENT/64">
             <strong>✧༺𝓥𝓘𝓝𝓒𝓔𝓝𝓣༻✧</strong>
         </div>
     </div>
+</div>
+<div id="mapa" class="tab">
+    <div class="box" style="padding: 0; overflow: hidden;">
+        <iframe 
+    src="http://83.168.106.219:21000/"
+    style="
+        width: 100%;
+        height: calc(100vh - 200px);
+        border: none;
+    ">
+       </iframe>
+
 </div>
 
 <div id="join" class="tab">
@@ -379,6 +388,11 @@ footer {
 </div>
 </div>
 
+<div id="shop" class="tab">
+    <div class="box">
+	  <h2>Witaj W Sklepie Serwerowym Rajskiej Doliny!!</h2>
+	
+
 <footer>
     © 2025 Rajska Dolina • Minecraft 1.21.10
 </footer>
@@ -391,15 +405,16 @@ function openTab(id, btn) {
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 }
+fetch("https://api.mcsrvstat.us/2/rajskadolina.6mc.pl")
+.then(res => res.json())
+.then(data => {
+    document.getElementById("players").textContent =
+        data.players
+        ? `${data.players.online}/${data.players.max}`
+        : "Offline";
+});
+
 </script>
 
 </body>
-</html>
-
-
-
-
-
-
-
-
+    </html>
